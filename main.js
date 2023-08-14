@@ -6,7 +6,7 @@ class Area {
         this.data = null;
     }
 
-    initTmap(polygon) {
+    initTmap() {
         this.map = new Tmapv3.Map("map_div", {
             center: new Tmapv3.LatLng(37.56520450, 126.98702028),
             width: "100%",
@@ -21,7 +21,7 @@ class Area {
 
     startLoadFile() {
         $.ajax({
-            url: 'seoul_coordinates.geojson',
+            url: 'seoul_jsonfile.json',
             type: 'GET',
             dataType: 'json',
             success: (data) => {
@@ -33,9 +33,9 @@ class Area {
 
                 for (let i = 0; i < this.data.length; i++) {
                     coordinates = this.data[i].geometry.coordinates;
-                    name.push(this.data[i].properties.temp);
+                    name.push(this.data[i].properties.ADM_NM);
 
-                    if (name[i] == "종로구 사직동" || name[i] == "구로구 구로4동") {
+                    if (name[i] == "사직동" || name[i] == "구로4동") {
                         user_data[name[i]] = '50';
                     } else {
                         user_data[name[i]] = '0';
@@ -71,8 +71,8 @@ class Area {
 
         for (let j = 0; j < coordinates.length; j++) {
             for (let z = 0; z < coordinates[j].length; z++) {
-                for (let x = 0; x < coordinates[j][z].length; x++) {
-                    points = coordinates[j][z][x];
+                // for (let x = 0; x < coordinates[j][z].length; x++) {
+                    points = coordinates[j][z];
 
                     var temp = points[1];
                     points[1] = points[0];
@@ -81,7 +81,7 @@ class Area {
                     point.push(points);
 
                     path.push(new Tmapv3.LatLng(points[0], points[1]));
-                }
+                
             }
         }
 
@@ -90,14 +90,11 @@ class Area {
             fillColor: color,
             strokeColor: "#99ccff",
             strokeWeight: 1,
-            map: this.map,
-        });
+            map: this.map,                
+            }
+        );
 
         this.polygons.push(polygon);
-
-        this.map.addListener(this.polygons, 'click', function(mouseEvent){
-            this.polygons.setOption({fillColor: "#fff000"});
-        });
     }
 }
 
