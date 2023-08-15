@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+        src="https://apis.openapi.sk.com/tmap/vectorjs?version=1&appKey=l7xxed2c734830ae4364975ef11e67a76e81"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/main.js" type="module" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>휠위고 검색</title>
+</head>
+
+<body>
+    <div id="map_div"></div>
+    <input type="text" class="text" id="search" placeholder="검색어 입력" onchange='searchPOI()' value="">
+    <div id="markerName"></div>
+    <ul id="markerList"></ul>
+</body>
+
+</html>
